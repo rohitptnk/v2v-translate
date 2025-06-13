@@ -3,3 +3,4 @@ git+https://github.com/huggingface/transformers.git
 torch
 torchaudio
 argostranslate
+scipy
