@@ -4,3 +4,4 @@ torch
 torchaudio
 argostranslate
 scipy
+gradio
