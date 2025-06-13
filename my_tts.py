@@ -1,5 +1,6 @@
 from transformers import BarkModel, AutoProcessor
 import torch
+import scipy 
 
 def text_to_speech(text, voice_preset="v2/hi_speaker_2"):
     """
@@ -34,5 +35,9 @@ def text_to_speech(text, voice_preset="v2/hi_speaker_2"):
     # generate speech
     speech_output = model.generate(**inputs)
     sampling_rate = model.generation_config.sample_rate
+    path = "output_audio.wav"
 
-    return speech_output, sampling_rate
+    # Save the generated audio to a fileimport scipy
+    scipy.io.wavfile.write("output_audio.wav", rate=sampling_rate, data=speech_output[0].cpu().numpy())
+
+    return path 
