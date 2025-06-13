@@ -1,22 +1,32 @@
+import gradio as gr
 from my_transcribe import transcribe_audio_locally
 from my_translate import translate_text
 from my_tts import text_to_speech
 
-def voice_to_voice(audio_file_path):
+def voice_to_voice(audio):
     # Step 1: Transcribe
-    result = transcribe_audio_locally(audio_file_path, model_size="base")
+    result = transcribe_audio_locally(audio, model_size="base")
     source_text = result["text"]
-    print("Transcribed:", source_text)
 
     # Step 2: Translate
     translated = translate_text(source_text, from_lang="en", to_lang="hi")
-    print("Translated:", translated)
 
-    # Step 3: Text to Speech
+    # Step 3: TTS
     output_audio_path = text_to_speech(translated, "v2/hi_speaker_2")
-    print("Saved translated speech to:", output_audio_path)
 
-    return output_audio_path
+    return output_audio_path, source_text, translated
+
+iface = gr.Interface(
+    fn=voice_to_voice,
+    inputs=gr.Audio(type="filepath", label="Upload English Audio"),
+    outputs=[
+        gr.Audio(label="Translated Audio (Hindi)"),
+        gr.Textbox(label="Transcribed Text (English)"),
+        gr.Textbox(label="Translated Text (Hindi)"),
+    ],
+    title="Voice-to-Voice Translator",
+    description="Upload an English audio file. It will be transcribed, translated to Hindi, and synthesized as speech."
+)
 
 if __name__ == "__main__":
-    voice_to_voice("Input Audio Sample.wav")
+    iface.launch()
