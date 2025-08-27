@@ -3,6 +3,9 @@ Try the demo live on 🤗 [Hugging Face Spaces](https://huggingface.co/spaces/ro
 🎙️ Voice-to-voice translator powered by Whisper (ASR), Argos Translate (translation), and Suno Bark (TTS) — from English speech to natural Hindi audio.
 
 # Steps
+
+**Note:** FFmpeg is required to run this project. Please ensure that FFmpeg is installed and added to your system PATH before running the application.
+
 - Clone the repo using ```git clone https://github.com/rohitptnk/v2v-translate.git```
 - Then ```cd v2v-translate```
 - Create a new environment (Optional)
